@@ -1,4 +1,4 @@
-import Battery
+from battery.battery import Battery
 
 class NubbinBattery(Battery):
    def _init_(self, lastServiceDate, currentDate){

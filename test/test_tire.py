@@ -1,44 +1,27 @@
 import unittest
-from datetime import datetime
 
-from engine.capulet_engine import CapuletEngine
-from engine.sternman_engine import SternmanEngine
-from engine.willoughby_engine import WilloughbyEngine
-
-class TestCapuletBattery(unittest.TestCase):
-    def test_should_be_serviced(self):
-        current_mileage = 32300
-        last_service_mileage = 10
-        engine = CapuletEngine(current_mileage, last_service_mileage)
-        self.assertTrue(engine.needs_service())
-
-    def test_should_be_serviced(self):
-        current_mileage = 32300
-        last_service_mileage = 10000
-        engine = CapuletEngine(current_mileage, last_service_mileage)
-        self.assertFalse(engine.needs_service())
-
-class TestSternmanBattery(unittest.TestCase):
-    def test_should_be_serviced(self):
-        warning_light_is_on = True
-        engine = SternmanEngine(warning_light_is_on)
-        self.assertTrue(engine.needs_service())
-
-    def test_should_be_serviced(self):
-        warning_light_is_on = False
-        engine = SternmanEngine(warning_light_is_on)
-        self.assertFalse(engine.needs_service())
+from tire.carrigan_tire import CarriganTire
+from tire.octoprime_tire import OctoprimeTire
 
 
-class TestWilloughbyBattery(unittest.TestCase):
-    def test_should_be_serviced(self):
-        current_mileage = 62300
-        last_service_mileage = 10
-        engine = CapuletEngine(current_mileage, last_service_mileage)
-        self.assertTrue(engine.needs_service())
+class TestCarriganTire(unittest.TestCase):
+    def test_needs_service_true(self):
+        tire_wear = [0.9, 0.1, 0.5, 0.9]
+        tires = CarriganTire(tire_wear)
+        self.assertTrue(tires.needs_service())
 
-    def test_should_be_serviced(self):
-        current_mileage = 62300
-        last_service_mileage = 10000
-        engine = CapuletEngine(current_mileage, last_service_mileage)
-        self.assertFalse(engine.needs_service())
+    def test_needs_service_false(self):
+        tire_wear = [0.2, 0.1, 0.6, 0.3]
+        tires = CarriganTire(tire_wear)
+        self.assertFalse(tires.needs_service())
+
+class TestOctoprimeTire(unittest.TestCase):
+    def test_needs_service_true(self):
+        tire_wear = [0.9, 0.7, 0.8, 0.9]
+        tires = OctoprimeTire(tire_wear)
+        self.assertTrue(tires.needs_service())
+
+    def test_needs_service_false(self):
+        tire_wear = [0.3, 0.2, 0.3, 0.4]
+        tires = OctoprimeTire(tire_wear)
+        self.assertFalse(tires.needs_service())
